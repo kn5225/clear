@@ -1,0 +1,53 @@
+{
+  "manifest_version": 3,
+  "name": "CLEAR: Accessible Web Co-Pilot",
+  "version": "1.3.0",
+  "description": "Web accessibility helper. Stops autoplay and motion, reduces color intensity, previews what a page contains, and explains or simplifies any text you select, using on-device AI.",
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "offscreen",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "CLEAR",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "defaults.js",
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq4lFnr+Db2tJsDbglbPl2GpNi+uJ5PBflbyBPQK54554BPe+fPvuO5HDnenryOMrZWHEXtAoPy5FHbLjvviJLl18BTr9+yDB2yqBu75Vj+6fnWo2Ltr59ZdxxrmtUl4P1gfcwiITP14OLa2S/hSJRvmIrZ8kgVlZI0q+dJEwO2oG9FxSM/ZnZ7lLLuSw9Vp5gFBl36OG255IyV6PAVUZn8NsojjY4k+b0Io8LuDnTY1GYT+Vw/90A8ZN0TLjFAX/KDlQbfQ1Qv3Ca1IAl7JPFSDzvzVh2tq7Px+YdYY2ztM8LE2IdM4iSE77+1PMIOzr66Cd3mq6QJZykOTIdM8wTQIDAQAB"
+}

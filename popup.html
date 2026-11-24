@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLEAR</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <img src="icons/48.png" alt="" width="28" height="28" />
+    <div>
+      <h1>CLEAR</h1>
+      <p class="sub">Accessible web co-pilot</p>
+    </div>
+    <span id="status" role="status" aria-live="polite"></span>
+    <label class="master" title="Turn CLEAR on or off">
+      <input type="checkbox" id="enabled" role="switch" aria-label="CLEAR on or off" />
+      <span class="track" aria-hidden="true"></span>
+    </label>
+  </header>
+  <p class="off-note" id="off-note" hidden>CLEAR is off. Pages are shown exactly as they are. Your settings are kept.</p>
+
+  <main id="main">
+    <h2>Motion and sound</h2>
+    <label class="row"><input type="checkbox" id="freeze" /><span>Stop video and sound that play by themselves</span></label>
+    <label class="row"><input type="checkbox" id="anim" /><span>Stop animations and GIFs</span></label>
+
+    <h2>Color</h2>
+    <div class="slider-row">
+      <div class="slider-head"><label for="desat">Reduce color</label><output id="amt" for="desat">0%</output></div>
+      <input type="range" min="0" max="100" step="1" value="0" id="desat" />
+      <p class="help">Left is full color. Far right is black and white. Changes the page as you drag.</p>
+    </div>
+    <div class="row">
+      <label class="grow"><input type="checkbox" id="soften" /><span>Dim images and video</span></label>
+      <select id="level" aria-label="How much to dim images and video">
+        <option value="subtle">A little</option>
+        <option value="moderate">Medium</option>
+        <option value="strong">A lot</option>
+      </select>
+    </div>
+    <label class="row"><input type="checkbox" id="blur" /><span>Blur pictures and video until I point at them</span></label>
+
+    <h2>Understanding the page</h2>
+    <label class="row"><input type="checkbox" id="forecast" /><span>Show the Page Forecast panel</span></label>
+    <label class="row"><input type="checkbox" id="clarify" /><span>Explain and Simplify selected text</span></label>
+    <p class="help indent">Select any text on a page, then choose Explain or Simplify. Also in the right-click menu.</p>
+    <div class="ai" id="ai" hidden>
+      <span id="ai-text"></span>
+      <button type="button" id="ai-btn" hidden>Turn on</button>
+    </div>
+
+    <div id="models" hidden>
+      <h2>CLEAR's own models</h2>
+      <p class="help">Optional. Downloaded once from huggingface.co, then they work offline. Used when Chrome has no built-in AI. Text stays on this computer.</p>
+      <div class="model" data-group="simplify">
+        <div class="model-head"><b>Simplify model</b><span class="model-size">about 270 MB</span></div>
+        <p class="help model-status">Checking…</p>
+        <div class="model-actions">
+          <button type="button" class="model-get">Download</button>
+          <button type="button" class="model-remove" hidden>Remove</button>
+        </div>
+      </div>
+      <div class="model" data-group="tone">
+        <div class="model-head"><b>Sarcasm models</b><span class="model-size">about 194 MB</span></div>
+        <p class="help model-status">Checking…</p>
+        <div class="model-actions">
+          <button type="button" class="model-get">Download</button>
+          <button type="button" class="model-remove" hidden>Remove</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>Settings apply immediately and are saved on this device.</footer>
+  <script src="defaults.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

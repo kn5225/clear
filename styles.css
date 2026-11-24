@@ -1,0 +1,55 @@
+/* CLEAR: styles injected into pages. */
+
+/* Color reduction. One filter on the page root, so every element (text,
+   backgrounds, images, video, SVG, late-loaded content) changes together and
+   the slider takes effect immediately. */
+html.clear-desat {
+  filter: saturate(var(--clear-sat, 1)) !important;
+}
+
+/* Gentle dimming of images and video only, so text stays crisp. */
+html.clear-softened img,
+html.clear-softened video,
+html.clear-softened canvas,
+html.clear-softened [style*="background-image"] {
+  filter: var(--clear-filter, none);
+}
+
+/* Reduce motion. */
+html.clear-reduced-anim *,
+html.clear-reduced-anim *::before,
+html.clear-reduced-anim *::after {
+  animation-duration: 0.001ms !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  transition-delay: 0s !important;
+  scroll-behavior: auto !important;
+}
+
+/* "Play" button shown over a paused video or frozen GIF. */
+.clear-play {
+  all: initial;
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  font: 600 12px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  color: #fff !important;
+  background: rgba(45, 58, 54, 0.94) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 999px !important;
+  padding: 7px 13px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+}
+.clear-play:focus-visible {
+  outline: 2px solid #fff !important;
+  outline-offset: 2px !important;
+}
+
+/* Blur pictures and video until the pointer or keyboard focus is on them. */
+html.clear-blur [data-clear-blur]:not(:hover):not(:focus) {
+  filter: blur(16px) !important;
+}
+html.clear-blur a:focus-visible [data-clear-blur] {
+  filter: none !important;
+}
